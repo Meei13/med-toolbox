@@ -1,0 +1,308 @@
+/* 分頁導覽 Tab 按鈕 */
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: -20px auto 25px;
+    padding: 0 15px;
+    flex-wrap: wrap;
+    max-width: 800px;
+  }
+  
+  .tab-btn {
+    background-color: var(--card-bg);
+    border: 2px solid transparent;
+    padding: 12px 20px;
+    border-radius: var(--radius-lg);
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--text-muted);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+  }
+  
+  .tab-btn.active {
+    background-color: var(--macaron-yellow);
+    color: var(--text-main);
+    border-color: var(--macaron-yellow-dark);
+    transform: translateY(-2px);
+  }
+  
+  /* 工具卡片 */
+  .tool-card {
+    display: none;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+  
+  .tool-card.active {
+    display: block;
+  }
+  
+  .tool-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+  
+  .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  
+  /* 表單元件 */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group.full-width {
+    grid-column: span 2;
+  }
+  
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  input, select {
+    padding: 10px 14px;
+    border: 1.5px solid #E9ECEF;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  
+  input:focus, select:focus {
+    border-color: var(--macaron-blue-dark);
+  }
+  
+  /* 馬卡龍色彩按鈕 */
+  .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  .btn:active {
+    transform: scale(0.98);
+  }
+  
+  .btn-mint { background-color: var(--macaron-mint); }
+  .btn-mint:hover { background-color: var(--macaron-mint-dark); }
+  
+  .btn-blue { background-color: var(--macaron-blue); }
+  .btn-blue:hover { background-color: var(--macaron-blue-dark); }
+  
+  .btn-pink { background-color: var(--macaron-pink); }
+  .btn-pink:hover { background-color: var(--macaron-pink-dark); }
+  
+  .btn-yellow { background-color: var(--macaron-yellow); }
+  .btn-yellow:hover { background-color: var(--macaron-yellow-dark); }
+  
+  .btn-secondary { background-color: #E9ECEF; color: var(--text-main); }
+  
+  /* 計算結果方塊與狀態標籤 */
+  .result-box {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--bg-cream);
+    border-radius: var(--radius-sm);
+    border-left: 5px solid var(--macaron-mint-dark);
+  }
+  
+  .result-item {
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  
+  .result-item strong {
+    font-size: 1.2rem;
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 8px;
+    background-color: #E9ECEF;
+  }
+  
+  .badge-green { background-color: var(--macaron-mint); }
+  .badge-yellow { background-color: var(--macaron-yellow); }
+  .badge-red { background-color: var(--macaron-pink); }
+  
+  .hidden { display: none !important; }
+  .note { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; }
+  
+  /* 表格與列表 */
+  .table-container { margin-top: 20px; }
+  .med-table { width: 100%; border-collapse: collapse; text-align: left; }
+  .med-table th, .med-table td { padding: 12px; border-bottom: 1px solid #E9ECEF; }
+  .med-table th { background-color: var(--bg-cream); font-size: 0.9rem; }
+  .btn-del { background: none; border: none; color: #FA5252; cursor: pointer; font-weight: bold; }
+  
+  /* 定時器清單列 */
+  .timer-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .timer-item {
+    padding: 15px;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* --- Tool 3 四時段表格與列印專用樣式 --- */
+
+/* 多選框排版 */
+.checkbox-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 8px 0;
+  }
+  
+  .checkbox-group label {
+    font-weight: normal;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  /* 4 時段表格樣式 */
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: var(--card-bg);
+  }
+  
+  .schedule-table th {
+    background-color: var(--macaron-blue);
+    color: var(--text-main);
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 0.95rem;
+    border: 1px solid #DEE2E6;
+  }
+  
+  .schedule-table td.time-slot {
+    vertical-align: top;
+    padding: 10px;
+    border: 1px solid #DEE2E6;
+    min-height: 120px;
+    height: 150px; /* 固定高度保持表格美觀 */
+    background-color: #FAFAFA;
+  }
+  
+  /* 表格內的藥品卡片小標籤 */
+  .med-chip {
+    background-color: #FFFFFF;
+    border-left: 4px solid var(--macaron-pink-dark);
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  
+  .med-chip .med-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .med-chip .med-qty {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  
+  /* 列印專用抬頭 (平時不顯示) */
+  .print-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--text-main);
+  }
+  
+  .print-date {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: bold;
+  }
+  
+  /* --- A4 紙張紙質列印優化 --- */
+  @media print {
+    /* 隱藏非列印元件 */
+    .header, .tab-nav, .no-print, .btn, .footer, .subtitle {
+      display: none !important;
+    }
+  
+    body {
+      background: white !important;
+      color: black !important;
+    }
+  
+    .tool-card {
+      box-shadow: none !important;
+      padding: 0 !important;
+      display: block !important;
+    }
+  
+    /* 確保表格在紙張上呈現高品質邊框 */
+    .schedule-table th {
+      background-color: #F1F3F5 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  
+    .schedule-table td.time-slot {
+      height: 180px; /* 列印時加高方便填寫格 */
+    }
+  
+    .med-chip {
+      border: 1px solid #CED4DA !important;
+      border-left: 4px solid #333 !important;
+    }
+  
+    .btn-del {
+      display: none !important; /* 列印時隱藏刪除按鈕 */
+    }
+
+    /* 紅色警示按鈕 (用於清空) */
+.btn-danger {
+    background-color: #FF8787;
+    color: #FFFFFF;
+  }
+  
+  .btn-danger:hover {
+    background-color: #FA5252;
+  }
+  
+  }

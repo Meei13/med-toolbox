@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>醫藥健康數位工具箱 | MedToolbox</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- 頂部 Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>⍟ 醫藥健康數位工具箱</h1>
+      <p>專為日常健康管理與用藥安全打造的輔助工具</p>
+    </div>
+  </header>
+
+  <!-- 分頁導覽 Tabs -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="tool1">生理指標計算</button>
+    <button class="tab-btn" data-tab="tool2">兒童劑量換算</button>
+    <button class="tab-btn" data-tab="tool3">每日用藥時間表</button>
+    <button class="tab-btn" data-tab="tool4">開瓶倒數計時</button>
+  </nav>
+
+  <!-- 主要工具內容區 -->
+  <main class="main-container">
+
+    <!-- Tool 1: 生理指標計算器 -->
+    <section id="tool1" class="tool-card active">
+      <h2>生理指標計算器 (BMI / BMR / TDEE)</h2>
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="height">身高 (cm)</label>
+          <input type="number" id="height" placeholder="例如：165" min="0">
+        </div>
+        <div class="input-group">
+          <label for="weight">體重 (kg)</label>
+          <input type="number" id="weight" placeholder="例如：60" min="0">
+        </div>
+        <div class="input-group">
+          <label for="age">年齡</label>
+          <input type="number" id="age" placeholder="例如：22" min="0">
+        </div>
+        <div class="input-group">
+          <label for="gender">性別</label>
+          <select id="gender">
+            <option value="male">男性</option>
+            <option value="female">女性</option>
+          </select>
+        </div>
+        <div class="input-group full-width">
+          <label for="activity">日常活動量</label>
+          <select id="activity">
+            <option value="1.2">久坐 / 幾乎不運動</option>
+            <option value="1.375">輕度活動 (每週運動 1-3 天)</option>
+            <option value="1.55">中度活動 (每週運動 3-5 天)</option>
+            <option value="1.725">高度活動 (每週運動 6-7 天)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-mint" id="btn-calc-tdee">✨ 開始計算</button>
+
+      <div id="result-tool1" class="result-box hidden">
+        <div class="result-item">
+          <span>BMI 數值：</span>
+          <strong id="bmi-val">-</strong>
+          <span id="bmi-status" class="badge">-</span>
+        </div>
+        <div class="result-item">
+          <span>基礎代謝率 (BMR)：</span>
+          <strong id="bmr-val">-</strong> kcal
+        </div>
+        <div class="result-item">
+          <span>每日總熱量消耗 (TDEE)：</span>
+          <strong id="tdee-val">-</strong> kcal
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool 2: 兒童用藥劑量換算器 -->
+    <section id="tool2" class="tool-card">
+      <h2>兒童用藥劑量換算器</h2>
+      <p class="subtitle">依據成人標準劑量與兒童年齡/體重推算建議劑量</p>
+      
+      <div class="form-grid">
+        <div class="input-group full-width">
+          <label for="adult-dose">成人單次標準劑量 (mg)</label>
+          <input type="number" id="adult-dose" placeholder="例如：500" min="0">
+        </div>
+        <div class="input-group">
+          <label for="calc-type">換算依據</label>
+          <select id="calc-type">
+            <option value="age">依年齡（揚氏公式 Young's Rule）</option>
+            <option value="weight">依體重（克拉克公式 Clark's Rule）</option>
+          </select>
+        </div>
+        <div class="input-group" id="group-child-age">
+          <label for="child-age">兒童年齡 (歲)</label>
+          <input type="number" id="child-age" placeholder="例如：6" min="1" max="17">
+        </div>
+        <div class="input-group hidden" id="group-child-weight">
+          <label for="child-weight">兒童體重 (kg)</label>
+          <input type="number" id="child-weight" placeholder="例如：20" min="1">
+        </div>
+      </div>
+      <button class="btn btn-blue" id="btn-calc-dosage">✨ 換算兒童劑量</button>
+
+      <div id="result-tool2" class="result-box hidden">
+        <div class="result-item">
+          <span>建議兒童單次劑量：</span>
+          <strong id="child-dose-val" class="highlight">-</strong> mg
+        </div>
+        <p class="note">註：此計算結果僅供參考，實際用藥請務必遵循醫師或藥師指示。</p>
+      </div>
+    </section>
+
+    <!-- Tool 3: 每日用藥時間表生成器 -->
+<section id="tool3" class="tool-card">
+    <h2>每日用藥時間表生成器</h2>
+    <p class="subtitle">輸入藥品與服用時機，自動生成當日四時段用藥檢視表</p>
+  
+    <!-- 輸入表單 (列印時隱藏) -->
+    <div class="form-grid no-print">
+      <div class="input-group">
+        <label for="med-name">藥品名稱</label>
+        <input type="text" id="med-name" placeholder="例如：普拿疼 / 降血壓藥">
+      </div>
+      <div class="input-group">
+        <label for="remark">備註</label>
+        <input type="text" id="remark" placeholder="例如：1 錠 / 5 ml / 飯前 / 飯後">
+      </div>
+      <div class="input-group full-width">
+        <label>服用時段 (可多選)</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="med-time" value="morning">早餐 (早)</label>
+          <label><input type="checkbox" name="med-time" value="noon">午餐 (中)</label>
+          <label><input type="checkbox" name="med-time" value="night">晚餐 (晚)</label>
+          <label><input type="checkbox" name="med-time" value="bedtime">睡前</label>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-pink no-print" id="btn-add-med">➕ 加入時間表 (自動儲存)</button>
+  
+    <!-- 可列印區塊 -->
+    <div class="print-area">
+      <!-- 列印抬頭與當日日期 -->
+      <div class="print-header">
+        <h3 id="schedule-title">當日用藥時間表</h3>
+        <p class="print-date">列印日期：<span id="current-date-str"></span></p>
+      </div>
+  
+      <!-- 4 時段矩陣表格 -->
+      <div class="table-container">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th width="25%">早上 (Breakfast)</th>
+              <th width="25%">中午 (Lunch)</th>
+              <th width="25%">晚上 (Dinner)</th>
+              <th width="25%">睡前 (Bedtime)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="slot-morning" class="time-slot"></td>
+              <td id="slot-noon" class="time-slot"></td>
+              <td id="slot-night" class="time-slot"></td>
+              <td id="slot-bedtime" class="time-slot"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div class="action-bar no-print" style="margin-top: 20px; display: flex; gap: 10px;">
+        <button class="btn btn-secondary" onclick="window.print()">列印今日用藥時間表</button>
+        <button class="btn btn-danger" id="btn-clear-schedule">清空時間表</button>
+      </div>
+  </section>
+
+    <!-- Tool 4: 開瓶倒數計時器 -->
+    <section id="tool4" class="tool-card">
+      <h2>特殊藥品開瓶倒數計時器</h2>
+      <p class="subtitle">針對眼藥水、胰島素等開瓶後效期較短之藥品</p>
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="item-name">藥品/眼藥水名稱</label>
+          <input type="text" id="item-name" placeholder="例如：青光眼眼藥水">
+        </div>
+        <div class="input-group">
+          <label for="open-date">開瓶日期</label>
+          <input type="date" id="open-date">
+        </div>
+        <div class="input-group">
+          <label for="expiry-days">效期天數</label>
+          <input type="number" id="expiry-days" placeholder="例如：28" min="1">
+        </div>
+      <button class="btn btn-yellow" id="btn-add-timer">➕ 新增追蹤項目</button>
+      <button class="btn btn-danger" id="btn-clear-timers">🗑️ 清空所有項目</button>
+
+      <div id="timer-list" class="timer-container"></div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾 Footer -->
+  <footer class="footer">
+    <p>鐵人賽 | 30 天開發挑戰作品</p>
+  </footer>
+
+  <!-- 載入各個 JS 模組 -->
+  <script src="js/app.js"></script>
+  <script src="js/tool1-calculator.js"></script>
+  <script src="js/tool2-dosage.js"></script>
+  <script src="js/tool3-schedule.js"></script>
+  <script src="js/tool4-timer.js"></script>
+</body>
+</html>
