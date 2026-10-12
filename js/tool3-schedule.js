@@ -64,9 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
         if (confirm("確定要清空用藥時間表中的所有藥品嗎？此動作無法復原！")) {
-          medList = [];
-          saveAndRender();
-        }
+            medList = [];
+            saveAndRender();
+          }
       });
     }
   
