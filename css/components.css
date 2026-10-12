@@ -1,47 +1,50 @@
 /* 分頁導覽 Tab 按鈕 */
-.tab-nav {
+.tab-list {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: -20px auto 25px;
-    padding: 0 15px;
-    flex-wrap: wrap;
-    max-width: 800px;
+    flex-wrap: wrap;       /* 螢幕太窄時自動換行 */
+    gap: 10px;             /* 按鈕之間的間距 */
+    list-style: none;      /* 移除點點 */
+    justify-content: center; /* 讓整排按鈕在頁面中間 */
+    align-items: center;
+    padding: 0;
+    margin: 0;
   }
   
+  /* 按鈕基本樣式 */
   .tab-btn {
-    background-color: var(--card-bg);
-    border: 2px solid transparent;
-    padding: 12px 20px;
-    border-radius: var(--radius-lg);
-    font-size: 0.95rem;
+    padding: 10px 16px;
+    border: 2px solid var(--macaron-pink ); /* 邊框 2px 實線/顏色 */
+    border-radius: var(--radius-btn, 12px);             /* 圓角 */
+    background-color: var(--white, #FFFFFF);
+    color: var(--text-primary, #2d3748);
+    font-size: 1rem;
     font-weight: bold;
-    color: var(--text-muted);
     cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
   
+  /* 懸停與選中狀態 */
+  .tab-btn:hover,
   .tab-btn.active {
-    background-color: var(--macaron-yellow);
-    color: var(--text-main);
-    border-color: var(--macaron-yellow-dark);
+    background-color: var(--macaron-pink-light, #ffecf5);
     transform: translateY(-2px);
   }
   
   /* 工具卡片 */
   .tool-card {
-    display: none;
+    display: none;                            /* 預設隱藏所有卡片 */
     background-color: var(--card-bg);
     padding: 30px;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-lg);          /* 圓潤大卡片圓角 */
     box-shadow: var(--shadow);
   }
   
+  /* 當卡片被啟動時顯示 */
   .tool-card.active {
     display: block;
   }
   
+  /* 卡片主標題與副標題 */
   .tool-card h2 {
     font-size: 1.4rem;
     margin-bottom: 6px;
@@ -53,30 +56,33 @@
     margin-bottom: 20px;
   }
   
-  /* 表單元件 */
+  /* 表單網格佈局 */
   .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;         /* 切分為 2 個等寬欄位 (各 50%) */
     gap: 15px;
     margin-top: 15px;
     margin-bottom: 20px;
   }
   
+  /* 單一輸入項：使用 Flexbox 讓 Label 與 Input 上下排列 */
   .input-group {
     display: flex;
     flex-direction: column;
   }
-  
+  /* 特殊全寬欄位：橫跨 2 個欄位 */
   .input-group.full-width {
     grid-column: span 2;
   }
   
+  /* 輸入框標籤文字 */
   label {
     font-size: 0.85rem;
     font-weight: 600;
     margin-bottom: 6px;
   }
   
+  /* 輸入框與下拉選單基底 */
   input, select {
     padding: 10px 14px;
     border: 1.5px solid #E9ECEF;
@@ -86,8 +92,11 @@
     transition: border-color 0.2s;
   }
   
-  input:focus, select:focus {
-    border-color: var(--macaron-blue-dark);
+  /* 輸入框 Focus 狀態 ( a11y 友善提示) */
+  .input-group input:focus,
+  .input-group select:focus {
+    border-color: var( --text-main);  /* 聚焦時切換為黑色 */
+    background-color: #ffffff;
   }
   
   /* 馬卡龍色彩按鈕 */
@@ -119,6 +128,45 @@
   .btn-yellow:hover { background-color: var(--macaron-yellow-dark); }
   
   .btn-secondary { background-color: #E9ECEF; color: var(--text-main); }
+
+  /* 📱 RWD 響應式調整：螢幕寬度在 600px 以下時套用 */
+    @media (max-width: 600px) {
+    /* 1. 工具卡片內距縮減，騰出更多手機顯示空間 */
+    .tool-card {
+      padding: 20px 16px;
+      border-radius: var(--radius-md, 16px);
+    }
+  
+    /* 2. 表單強制轉為單欄直立排列 */
+    .form-grid {
+      grid-template-columns: 1fr; /* 切分為單一欄位 */
+      gap: 12px;
+    }
+  
+    /* 3. 原本的跨欄屬性在單欄下歸位 */
+    .input-group.full-width {
+      grid-column: span 1;
+    }
+  
+    /* 4. Tab 分頁按鈕彈性自動適應 */
+    .tab-list {
+      gap: 8px;
+    }
+  
+    .tab-btn {
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      flex: 1 1 auto; /* 讓按鈕在小螢幕上等分排滿 */
+      text-align: center;
+    }
+    input, select, .btn {
+        min-height: 44px; /* 確保手指輕鬆點擊不誤觸 */
+      }
+      input, select {
+        font-size: 1rem; /* 防止 iOS 點擊輸入框時自動縮放畫面 */
+      }
+
+  }
   
   /* 計算結果方塊與狀態標籤 */
   .result-box {
@@ -304,5 +352,5 @@
   .btn-danger:hover {
     background-color: #FA5252;
   }
-  
+
   }

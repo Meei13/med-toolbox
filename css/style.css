@@ -1,13 +1,15 @@
 /* --- 馬卡龍配色系統與CSS變數 --- */
 :root {
-    --macaron-mint: #ddf4bd;
-    --macaron-mint-dark: #c5ffe3;
+    --macaron-mint: #e6faca;
+    --macaron-mint-dark: #c1ebe5;
+    --macaron-pink-light: #fff0f2;
     --macaron-pink: #fddfdf;
-    --macaron-pink-dark: #ffceea;
+    --macaron-pink-dark: #fed7ed;
     --macaron-blue: #cfeaff;
-    --macaron-blue-dark: #e0caff;
+    --macaron-blue-dark: #e9dcfb;
     --macaron-yellow: #fff6cf;
     --macaron-yellow-dark: #ffe1bd;
+    --white: #FFFFFF;
   
     --bg-cream: #FAF9F6;
     --card-bg: #FFFFFF;
@@ -35,8 +37,8 @@
   
   /* 頁首 Header */
   .header {
-    background: linear-gradient(150deg, var(--macaron-blue), var(--macaron-yellow));
-    padding: 30px 20px;
+    background: linear-gradient(150deg, var(--macaron-blue), var(--macaron-yellow), var(--macaron-pink));
+    padding: 20px 15px;
     text-align: center;
     color: var(--text-main);
   }
