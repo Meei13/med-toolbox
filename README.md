@@ -1,56 +1,60 @@
-## 專案簡介 (Overview)
+## 專案簡介
 
-本專案為 **iThome 鐵人賽** 參賽作品，旨在將複雜的醫療健康數據與日常照護需求，轉化為簡易易用的微型 Web 工具。
-
-專案堅持採用 **Vanilla JS (原生 JavaScript)** 開發，無第三方框架包袱，實現快速載入、離線 LocalStorage 持久化儲存，並支援 **A4 紙本高畫質列印 (`@media print`)**，讓長輩與照護者能輕鬆將健康資訊轉化為實體紀錄。
+**《醫藥健康數位工具箱》** 為 **iThome 鐵人賽** 參賽作品，專為「家庭照護情境」打造。針對日常健康管理四大常見需求，提供簡單、安心、無負擔的防呆與自動化輔助工具。
 
 ---
 
-## 已開發工具模組 (Toolbox Features)
+## 4 大核心功能
 
-### Tool 1：BMI & 基礎代謝率 (BMR/TDEE) 計算器
-* 自動計算 BMI、BMR 與每日總熱量消耗 (TDEE)。
-* 結合視覺化健康區間提示與馬卡龍配色卡片。
+### 1. Tool 1：生理指標計算器 (BMI / BMR / TDEE)
+- **功能描述**：輸入身高、體重、年齡與日常活動量，快速計算每日熱量需求與基礎代謝率。
+- **亮點**：搭配動態燈號警示，適用於日常健康維護與慢性病飲食管理。
 
-### Tool 2：每日建議飲水量與進度追蹤器
-* 依據體重自動換算每日最佳飲水量。
-* 提供一鍵快速打卡與 LocalStorage 歷史紀錄追蹤。
+### 2. Tool 2：兒童用藥劑量換算器
+- **功能描述**：結合藥學經典公式 **揚氏公式 (Young's Rule)** 與 **克拉克公式 (Clark's Rule)**，依年齡或體重換算安全的兒童用藥劑量。
+- **亮點**：內建輸入值邊界驗證與防呆警示，適用於深夜緊急退燒藥水驗算與海外成藥劑量確認。
 
-### Tool 3：每日用藥時間表生成器 (Daily Medication Schedule)
-* **多時段分派**：支援將單一藥品同時歸類至「早/中/晚/睡前」4 大服用時段。
-* **資料同步 (CRUD)**：支援單筆藥品卡片刪除與一鍵清空時間表，資料自動同步至 LocalStorage。
-* **無障礙表單設計**：修復 HTML `<label>` 關聯性與 Optional Chaining (`?.`) 空值防呆，確保程式碼穩定性。
-* **A4 乾淨紙本列印 (`@media print`)**：
-  * 自動隱藏按鈕、輸入框與無關 UI。
-  * 包含列印專用抬頭與自動帶入當日日期 (`YYYY/MM/DD`)。
-  * 使用 `print-color-adjust: exact` 保留灰階質感，並加高表格格子方便手寫備註。
+### 3. Tool 3：每日用藥時間表生成器
+- **功能描述**：動態新增藥品與服用時段（早/中/晚/睡前），自動生成直覺的矩陣時間表。
+- **亮點**：支援 **一鍵列印當日紙本**（自動優化列印 CSS 樣式）與 **LocalStorage 本地紀錄記憶**，適合多重用藥長者。
 
-### Tool 4：藥品保存期限與動態過期提醒器 (開發中)
-* 透過原生 `Date` 物件與 `setDate()` 實作跨月/跨年效期自動計算。
-* 輸入開封日與效期天數 (`expiryDays`)，秒算預計過期日期。
+### 4. Tool 4：特殊藥品開瓶倒數計時器
+- **功能描述**：設定藥品開瓶日期與自訂效期天數（如 28 天），自動計算剩餘天數與即時狀態標籤。
+- **亮點**：三階段馬卡龍警示燈號（安全/警告/過期），支援 LocalStorage 歷史紀錄持久化儲存，避免誤用過期眼藥水或散瞳劑。
 
 ---
 
-## 技術亮點 (Technical Highlights)
+## UI/UX 設計規範
 
-* **單一真實數據源 (Single Source of Truth)**：UI 完全由資料陣列 (`Array of Objects`) 驅動，拒絕手動混亂操作 DOM。
-* **事件代理與動態監聽 (Event Delegation)**：動態產生的 DOM 卡片直接進行事件綁定，解決 `querySelector` 時間差抓取 null 問題。
-* **防呆衛語句 (Guard Clauses)**：完整驗證表單輸入（未填藥名、未選時段攔截），提升用戶體驗。
-* **A4 Print CSS 優化**：專為銀髮族與紙本照護設計，一鍵 `window.print()` 輸出乾淨無雜訊的醫療時間表。
-* **無框架零依賴**：100% 原生 HTML5 / CSS3 (Flexbox & Grid) / Vanilla JS，載入速度極快。
+- **溫和療癒配色**：採用低飽和度的馬卡龍色系（Macaron Palette），降低使用者面對醫療主題時的焦慮感。
+- **SPA 單頁切換體驗**：採用頂端 Tab 選單切換，無需刷新頁面即可流暢切換 4 大工具。
+- **響應式排版 (RWD)**：支援 Mobile、Tablet 與 Desktop，完美適應各式裝置螢幕。
+- **無障礙友善 (A11y)**：動態同步 `aria-selected` 狀態，提供視障與輔具使用者更好的操作體驗。
+
+---
+
+## 技術選型與目錄結構
+
+本專案貫徹「純原生 Web 開發」精神，不依賴任何前端框架（如 React, Vue）或 CSS 框架（如 Bootstrap, Tailwind）：
+
+- **前端核心**：HTML5, CSS3 (CSS Variables, Flexbox, Grid), Vanilla JavaScript (ES6+)
+- **資料持久化**：Web Storage API (LocalStorage)
+- **版本控制與部署**：Git, GitHub, GitHub Pages
 
 ---
 
 ## 目錄結構 (Project Structure)
 
 ```text
-macaron-medical-toolbox/
-├── index.html              # 主頁面入口 (包含 Tool 1 ~ Tool 4 頁面區塊)
+med-toolbox/
+├── index.html               # 網頁主要骨架 (SPA 結構，包含 4 大 Tool Section)
 ├── css/
-│   └── style.css           # 全域樣式、馬卡龍變數與 @media print 列印樣式
+│   ├── style.css            # 全局 Reset、CSS 變數系統與主佈局
+│   └── components.css       # 通用元件樣式 (按鈕, 表格, Badge 標籤, 列印專用樣式)
 ├── js/
-│   ├── tool1-bmi.js        # Tool 1 計算邏輯
-│   ├── tool2-water.js      # Tool 2 打卡追蹤邏輯
-│   ├── tool3-schedule.js   # Tool 3 用藥時間表核心邏輯 (LocalStorage & DOM 渲染)
-│   └── tool4-expiry.js     # Tool 4 日期計算邏輯
-└── README.md               # 專案說明文件
+│   ├── app.js               # 全局控制 (Tab 切換與無障礙綁定)
+│   ├── tool1-calculator.js  # Tool 1 生理指標計算邏輯
+│   ├── tool2-dosage.js      # Tool 2 兒童劑量換算邏輯
+│   ├── tool3-schedule.js    # Tool 3 時間表生成、列印與LocalStorage 記憶
+│   └── tool4-timer.js       # Tool 4 開瓶計時、自訂效期與 LocalStorage 記憶
+└── README.md                # 專案說明文件
