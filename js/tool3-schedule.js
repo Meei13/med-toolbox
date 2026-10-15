@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 chip.innerHTML = `
                   <div class="med-info">
                     <strong>${med.name}</strong>
-                    <span class="med-qty">用量: ${med.dosage}</span>
+                    <span class="med-qty">備注: ${med.dosage}</span>
                   </div>
                   <button class="btn-del no-print" data-id="${med.id}" title="刪除此藥品">❌</button>
                 `;
